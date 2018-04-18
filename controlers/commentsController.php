@@ -23,12 +23,12 @@ function addnew()
        newComment(['sender'=>$_POST['sender'], 'message'=>$_POST['message']]);
    }
 
-   header("Location: /comments");
+    redirectBack();
 }
 
 function delete() {
 if(isset($_POST['file'])) {
     commentUnlink($_POST['file']);
 }
-header("Location: /comments");
+    redirectBack();
 }

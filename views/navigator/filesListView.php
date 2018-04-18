@@ -7,13 +7,16 @@
 <div class="container">
     <h1>Files:</h1>
 </div>
-<div class="container">
+<div class="container btn-group">
 
 </div>
 <div class="container">
-    <ul>
+    <ul style="list-style: none">
         <?php foreach ($li as $line): ?>
-            <li><?= $line['name'] ?></li>
+            <li> <?= $line['icon'] ?>
+                <a href=" <?=$line['path'] ?> ">
+                    <?= $line['name'] ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 </div>

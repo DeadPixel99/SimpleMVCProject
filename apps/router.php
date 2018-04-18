@@ -21,7 +21,7 @@ function parseUrl(string $url): array
 {
     $buffer = trim($url, " /\t\n\r\0\x0B");
     if(false != $enteringIndex = stripos($url, '?')) {
-        $buffer = substr($url, 1, $enteringIndex);
+        $buffer = substr($url, 1, $enteringIndex-1);
     }
     $parsedUrl = explode('/', $buffer);
     return (empty($parsedUrl[0]))?[getFromConfig('home')]:$parsedUrl;
@@ -60,6 +60,22 @@ function executeRequest(array $request)
             return $method();
         }
     }
+    throw404();
+}
+
+function redirectBack($toDie=false)
+{
+    if(isset($_SERVER['HTTP_REFERER'])){
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+    else {
+        header('Location: ..');
+    }
+    if($toDie) die;
+}
+
+function throw404()
+{
     header("HTTP/1.0 404 Not Found");
     if(file_exists(getFromConfig('errors').'404.php')) {
         include getFromConfig('errors').'404.php';
