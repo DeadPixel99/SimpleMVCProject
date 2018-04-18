@@ -8,7 +8,7 @@ function getFilesList($path)
     {
         foreach (scandir($path) as $filename)
         {
-            $type = (is_dir($path.'/'.$filename))? 'dir' : 'file';
+            $type = getTypeOfFile($path.'/'.$filename);
             $filesList[] = [
                 'name' => $filename,
                 'path' => realpath($path.'/'.$filename),
@@ -33,3 +33,25 @@ function createDir($path, $name)
     mkdir($dir);
 }
 
+function getTypeOfFile($path)
+{
+    if(is_dir($path))
+        return 'Dir';
+    $mimeType = explode('/', mime_content_type($path))[0];
+    switch ($mimeType)
+    {
+        case 'text': return 'Text';
+        case 'image': return 'Img';
+        default: return 'Other';
+    }
+}
+
+function getIconForFile($type)
+{
+    switch ($type){
+        case 'Dir': return '<i class="fa fa-file"></i>';
+        case 'Text': return '<i class="fa fa-file-text-o"></i>';
+        case  'Img': return '<i class="fa fa-file-image-o"></i>';
+        default: return '';
+    }
+}

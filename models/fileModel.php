@@ -23,3 +23,13 @@ function updateTextFile($filename, $content)
         fclose($file);
     }
 }
+
+function readFileAsImg($filename)
+{
+    if(is_file($filename) || mime_content_type($filename))
+    {
+        $bufferDir  = str_replace(realpath(__DIR__.'/..'), '..', $filename);
+        return "<img src='{$bufferDir}' alt='Permission denied'>";
+    }
+    return '<p>No image content :(</p>';
+}

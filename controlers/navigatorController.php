@@ -25,14 +25,21 @@ function getParsedFilesList($filesArray)
         $parsedFiles[] = [
             'name' => $file['name'],
             'realPath' => $file['path'],
-            'path' => ($file['type']=='dir')?'navigator?path='.$file['path']:'file/view?path='.$file['path'],
-            'icon'=> ($file['type']=='dir')?'<i class="material-icons">folder</i>':'<i class="material-icons">insert_drive_file</i>'
+            'path' => ($file['type']=='Dir')? 'navigator?path='.$file['path'] : 'file/view?path='.$file['path'],
+            'icon'=> getIconForFile($file['type']),
+            'type'=> $file['type']
         ];
     }
     return $parsedFiles;
+}
+
+function makeDir()
+{
+
 }
 
 function navDelete()
 {
 
 }
+

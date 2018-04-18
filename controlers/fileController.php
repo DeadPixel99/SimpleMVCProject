@@ -4,9 +4,16 @@ require_once getFromConfig('models').'fileModel.php';
 
 function view()
 {
-    $file = readFileAsText($_GET['path']);
     pageRender('head', ['title'=>'View']);
-    pageRender('navigator/file', ['content'=>$file, 'path'=>$_GET['path']]);
+    if(function_exists("readFileAs{$_GET['type']}"))
+    {
+        $file = call_user_func("readFileAs{$_GET['type']}" ,$_GET['path']);
+        pageRender('navigator/file', ['content'=>$file, 'path'=>$_GET['path']]);
+    }
+    else
+    {
+        redirectBack();
+    }
 }
 
 function edit()
@@ -31,3 +38,4 @@ function saveEditedFile()
     updateTextFile($_POST['fileLocation'], $_POST['newContent']);
     header("Location: view?path={$_POST['fileLocation']}");
 }
+
