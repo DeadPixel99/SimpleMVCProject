@@ -12,7 +12,7 @@ $config = [
     'controlers'=>__DIR__.'/controlers/',
     'errors'=>__DIR__.'/views/errors/', //folder for errors templates like 404 or 503
     'files'=>__DIR__.'/files/', //files folder
-    'home'=>'comments' //homepage
+    'home'=>'homepage' //homepage
 ];
 
 require_once $config['render'];

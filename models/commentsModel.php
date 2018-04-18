@@ -9,7 +9,7 @@
 
 function addComment(string $comment)
 {
-    $file = fopen(getFromConfig('files').getFileName('comment.txt'), 'w');
+    $file = fopen(getFromConfig('files').'comments/'.getFileName('comment.txt'), 'w');
     fwrite($file, $comment);
     fclose($file);
 }
@@ -29,7 +29,7 @@ function getFileName(string $prefix): string
 {
     do {
         $filename = time().$prefix;
-    } while(file_exists(getFromConfig('files').$filename));
+    } while(file_exists(getFromConfig('files').'comments/'.$filename));
     return $filename;
 }
 
@@ -45,10 +45,18 @@ function newComment(array $commentArr)
 
 function getAllComments():array
 {
-    $path = getFromConfig('files');
+    $path = getFromConfig('files').'comments/';
     $files = array_diff(scandir($path), ['.','..','.gitignore']);
     foreach ($files as $file){
         $comments[] = array_merge(unserialize(file_get_contents($path.$file)), ['file'=>$file]);
     }
     return $comments ?? [];
+}
+
+function commentUnlink($filename)
+{
+    $file = getFromConfig('files')."comments/{$filename}";
+    if(file_exists($file)) {
+        unlink($file);
+    }
 }

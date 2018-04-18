@@ -10,9 +10,9 @@ require_once getFromConfig('models').'commentsModel.php';
 function main() {
     pageRender('head', ['title'=>'Comments']);
     foreach (getAllComments() as $comment) {
-        pageRender('comments', $comment);
+        pageRender('comments/comments', $comment);
     }
-    pageRender('addComment');
+    pageRender('comments/addComment');
 }
 
 function addnew()
@@ -28,10 +28,7 @@ function addnew()
 
 function delete() {
 if(isset($_POST['file'])) {
-    $file = getFromConfig('files').$_POST['file'];
-    if(file_exists($file)) {
-        unlink($file);
-    }
+    commentUnlink($_POST['file']);
 }
 header("Location: /comments");
 }
