@@ -4,6 +4,7 @@
     </div>
     <div class="container-fluid"  style="position: fixed">
         <input hidden value="<?= $path ?>" name="fileLocation">
+        <input hidden value="<?= $type ?>" name="fileType">
         <input type="submit" value="Save" class="btn btn-success" style="margin-top: 1%">
     </div>
 </form>
