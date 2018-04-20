@@ -19,7 +19,8 @@
     </ul>
 </div>
 <div class="container btn-group" style="margin-top: 3%">
-    <form method="post" action="navigator/makeDir">
+    <form method="post" action="navigator/makeDirForm">
+        <input type="hidden" name="futurePath" value="<?= $line['location'] ?>">
         <input type="submit" class="btn btn-success" value="Create dir">
     </form>
     <form method="post" action="navigator/loadFile" style="margin-left: 2%; background-color: lightgrey; border-radius: 7px" enctype="multipart/form-data">

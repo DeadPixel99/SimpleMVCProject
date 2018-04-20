@@ -34,8 +34,23 @@ function getParsedFilesList($filesArray)
     return $parsedFiles;
 }
 
-function makeDir()
+function makeDirForm()
 {
+    if(isset($_POST['futurePath']))
+    {
+        pageRender('head', ['title'=>'Make dir']);
+        pageRender('navigator/createDir', ['path'=>$_POST['futurePath']]);
+    }
+}
+
+function makeDirProccess()
+{
+    if(isset($_POST['path']) && $_POST['folderName']){
+        createDir($_POST['path'], $_POST['folderName']);
+        header("Location: ../navigator?path={$_POST['path']}");
+    }
+    else
+        header("Location: ../navigator");
 
 }
 
