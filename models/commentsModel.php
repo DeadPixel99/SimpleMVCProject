@@ -6,14 +6,26 @@
  * Time: 16:03
  */
 
-
+/**
+ * @param string $comment
+ * @purpose saves users comment as .txt file in 'files/comments/' directory if it exists
+ */
 function addComment(string $comment)
 {
-    $file = fopen(getFromConfig('files').'comments/'.getFileName('comment.txt'), 'w');
-    fwrite($file, $comment);
-    fclose($file);
+    $dir = getFromConfig('files').'comments';
+    if(file_exists($dir))
+    {
+        $file = fopen($dir.'/'.getFileName('comment.txt'), 'w');
+        fwrite($file, $comment);
+        fclose($file);
+    }
 }
 
+/**
+ * @param string $toFilter
+ * @return string
+ * @purpose replaces in $toFilter filth words by '***'
+ */
 function filthWordsFilter(string $toFilter):string
 {
     $filthFilter = [
@@ -25,6 +37,11 @@ function filthWordsFilter(string $toFilter):string
     return $toFilter;
 }
 
+/**
+ * @param string $prefix
+ * @return string
+ * @purpose generates filename for comment
+ */
 function getFileName(string $prefix): string
 {
     do {
@@ -33,6 +50,10 @@ function getFileName(string $prefix): string
     return $filename;
 }
 
+/**
+ * @param array $commentArr
+ * @purpose checks if $commentArr is legit comment and saves it as file in that case
+ */
 function newComment(array $commentArr)
 {
     if(!isset($commentArr['sender']) || empty($commentArr['sender']))
@@ -43,6 +64,10 @@ function newComment(array $commentArr)
     addComment(serialize($commentArr));
 }
 
+/**
+ * @return array
+ * @purpose returns all comments in folder as array
+ */
 function getAllComments():array
 {
     $path = getFromConfig('files').'comments/';
@@ -53,6 +78,10 @@ function getAllComments():array
     return $comments ?? [];
 }
 
+/**
+ * @param $filename
+ * @purpose removes $filename comment from folder
+ */
 function commentUnlink($filename)
 {
     $file = getFromConfig('files')."comments/{$filename}";

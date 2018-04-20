@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * @param $path
+ * @return array
+ * @purpose scans dir $path and returns array with information about all content in it
+ */
 function getFilesList($path)
 {
     $filesList = [];
@@ -20,6 +24,11 @@ function getFilesList($path)
     return $filesList;
 }
 
+/**
+ * @param $path
+ * @param $name
+ * @purpose $creates new dir {$path}/{$name}
+ */
 function createDir($path, $name)
 {
     $dir = "{$path}/{$name}";
@@ -34,6 +43,10 @@ function createDir($path, $name)
     mkdir($dir);
 }
 
+/**
+ * @param $path
+ * @purpose recursive remove of $path dir and all contend in it
+ */
 function removeDir($path)
 {
     if(is_dir($path))
@@ -52,6 +65,11 @@ function removeDir($path)
     }
 }
 
+/**
+ * @param $path
+ * @return string
+ * @purpose gets type of file
+ */
 function getTypeOfFile($path)
 {
     if(is_dir($path))
@@ -65,6 +83,11 @@ function getTypeOfFile($path)
     }
 }
 
+/**
+ * @param $type
+ * @return string
+ * @purpose gets icon for navigator View depends on filetype $type
+ */
 function getIconForFile($type)
 {
     switch ($type){
@@ -75,6 +98,11 @@ function getIconForFile($type)
     }
 }
 
+/**
+ * @param string $name
+ * @return array
+ * @purpose returns all uploaded files as user-friendly array
+ */
 function getUploadedFiles(string $name): array
 {
     if (is_string($_FILES[$name]['name'])) {

@@ -3,6 +3,9 @@
 
 require_once getFromConfig('models').'navigatorModel.php';
 
+/**
+ * @purpose renders list of files depends on GET request
+ */
 function main()
 {
     $link = $_GET['path'] ?? __DIR__;
@@ -11,12 +14,11 @@ function main()
     pageRender('navigator/filesList', ['li'=>$files]);
 }
 
-
-function outFile()
-{
-    print_r(readFileAsText($_GET['path']));
-}
-
+/**
+ * @param $filesArray
+ * @return array
+ * @purpose parses $filesArray to make it compatible with navigator View
+ */
 function getParsedFilesList($filesArray)
 {
     $parsedFiles = [];
@@ -34,7 +36,9 @@ function getParsedFilesList($filesArray)
     return $parsedFiles;
 }
 
-
+/**
+ * @purpose depending on users POST request deletes dir or creates new one
+ */
 function makeOrRemoveDir()
 {
     if(isset($_POST['futurePath']) && isset($_POST['dirName']) && isset($_POST['buttn'])){
@@ -49,7 +53,9 @@ function makeOrRemoveDir()
 
 }
 
-
+/**
+ * @purpose loads file from form in specified by POST request path
+ */
 function loadFile()
 {
         foreach (getUploadedFiles("uploadedFile") as $file)

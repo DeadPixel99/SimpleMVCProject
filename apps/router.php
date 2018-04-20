@@ -5,8 +5,8 @@
  */
 
 
-/*
- * parses users request and executes it
+/**
+ * @purpose parses users request and executes it
  */
 function processRequest()
 {
@@ -14,8 +14,10 @@ function processRequest()
     executeRequest($url);
 }
 
-/*
- * romoves unsupported by router symbols from URL
+/**
+ * @param string $url
+ * @return array
+ * @purpose removes from $url needles symbols and splits it on two parts: [{$controllerName}, {$methodName}]
  */
 function parseUrl(string $url): array
 {
@@ -27,8 +29,10 @@ function parseUrl(string $url): array
     return (empty($parsedUrl[0]))?[getFromConfig('home')]:$parsedUrl;
 }
 
-/*
- * chooses controller depends on request or throws 404
+/**
+ * @param array $data
+ * @return null|string
+ * @purpose returns controllers link depends on in name in controllers DIR or null
  */
 function chooseController(array $data)
 {
@@ -39,8 +43,10 @@ function chooseController(array $data)
     return null;
 }
 
-/*
- * gets info from config or returns null
+/**
+ * @param string $value
+ * @return null
+ * @purpose gets info from config or returns null
  */
 function getFromConfig(string $value)
 {
@@ -48,8 +54,10 @@ function getFromConfig(string $value)
     return (array_key_exists($value, $config))? $config[$value] : null;
 }
 
-/*
- * executing users recuest or throws 404 if controller does not exists
+/**
+ * @param array $request
+ * @return mixed
+ * @purpose executing users recuest or throws 404 if controller does not exists
  */
 function executeRequest(array $request)
 {
@@ -63,6 +71,10 @@ function executeRequest(array $request)
     throw404();
 }
 
+/**
+ * @param bool $toDie
+ * @purpose redirects user on previous page or to home page and stops script if $toDie == true
+ */
 function redirectBack($toDie=false)
 {
     if(isset($_SERVER['HTTP_REFERER'])){
@@ -74,6 +86,9 @@ function redirectBack($toDie=false)
     if($toDie) die;
 }
 
+/**
+ * @purpose sends header 404 and stops script
+ */
 function throw404()
 {
     header("HTTP/1.0 404 Not Found");

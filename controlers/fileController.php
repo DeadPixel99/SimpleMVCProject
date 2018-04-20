@@ -2,6 +2,9 @@
 
 require_once getFromConfig('models').'fileModel.php';
 
+/**
+ * @purpose allows user view file depends on GET request
+ */
 function view()
 {
     pageRender('head', ['title'=>'View']);
@@ -16,6 +19,9 @@ function view()
     }
 }
 
+/**
+ * @purpose allows user to edit files from GET request specified as 'editable'
+ */
 function edit()
 {
     $editableTypes = ['Text'];
@@ -35,6 +41,9 @@ function edit()
 
 }
 
+/**
+ * @purpose saves changes in txt file that were sent in POST request
+ */
 function saveEditedFile()
 {
     if(!isset($_POST['fileLocation']) || !is_file($_POST['fileLocation'])){

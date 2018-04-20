@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @param $file
+ * @return string
+ * @purpose reads $file and returns it as html-ready text
+ */
 function readFileAsText($file)
 {
     $output = '';
@@ -14,6 +19,11 @@ function readFileAsText($file)
     return htmlspecialchars($output);
 }
 
+/**
+ * @param $filename
+ * @param $content
+ * @purpose rewrites $filename file with $content
+ */
 function updateTextFile($filename, $content)
 {
     if(is_file($filename))
@@ -24,6 +34,11 @@ function updateTextFile($filename, $content)
     }
 }
 
+/**
+ * @param $filename
+ * @return string
+ * @purpose reads $filename and returns it as html-ready image
+ */
 function readFileAsImg($filename)
 {
     if(is_file($filename))
