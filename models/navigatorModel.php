@@ -12,7 +12,8 @@ function getFilesList($path)
             $filesList[] = [
                 'name' => $filename,
                 'path' => realpath($path.'/'.$filename),
-                'type' => $type
+                'type' => $type,
+                'location'=>$path
             ];
         }
     }
@@ -49,9 +50,25 @@ function getTypeOfFile($path)
 function getIconForFile($type)
 {
     switch ($type){
-        case 'Dir': return '<i class="fa fa-file"></i>';
+        case 'Dir': return '<i class="fa fa-folder-o"></i>';
         case 'Text': return '<i class="fa fa-file-text-o"></i>';
         case  'Img': return '<i class="fa fa-file-image-o"></i>';
-        default: return '';
+        default: return '<i class="fa fa-window-close-o"></i>';
     }
+}
+
+function getUploadedFiles(string $name): array
+{
+    if (is_string($_FILES[$name]['name'])) {
+        return [$_FILES[$name]];
+    }
+    $files = [];
+    $count = count($_FILES[$name]['name']);
+    $keys = array_keys($_FILES[$name]);
+    for ($i = 0; $i < $count; $i++) {
+        foreach ($keys as $key) {
+            $files[$i][$key] = $_FILES[$name][$key][$i];
+        }
+    }
+    return $files;
 }

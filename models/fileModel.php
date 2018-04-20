@@ -11,7 +11,7 @@ function readFileAsText($file)
         }
         fclose($buffer);
     }
-    return nl2br(htmlspecialchars($output));
+    return htmlspecialchars($output);
 }
 
 function updateTextFile($filename, $content)
@@ -26,10 +26,11 @@ function updateTextFile($filename, $content)
 
 function readFileAsImg($filename)
 {
-    if(is_file($filename) || mime_content_type($filename))
+    if(is_file($filename))
     {
         $bufferDir  = str_replace(realpath(__DIR__.'/..'), '..', $filename);
         return "<img src='{$bufferDir}' alt='Permission denied'>";
     }
     return '<p>No image content :(</p>';
 }
+

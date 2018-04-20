@@ -6,5 +6,5 @@
     </form>
 </div>
 <div class="container" style="background-color: lightgrey; border-radius: 7px; margin-top: 2%">
-    <p> <?= $content ?> </p>
+    <p> <?= nl2br($content) ?> </p>
 </div>

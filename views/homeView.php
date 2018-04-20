@@ -1,12 +1,11 @@
 <div class="container">
     <div class="row">
-        <h1>Controllers list</h1>
+        <h1>Hello there</h1>
     </div>
 </div>
 <div class="container">
     <ul>
-        <?php foreach ($clist as $value): ?>
-        <li><a href="#"><?= $value ?></a></li>
-        <?php endforeach; ?>
+       <li><a href="comments">Comments</a></li>
+       <li><a href="navigator">Navigator</a></li>
     </ul>
 </div>

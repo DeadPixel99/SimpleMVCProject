@@ -27,7 +27,8 @@ function getParsedFilesList($filesArray)
             'realPath' => $file['path'],
             'path' => ($file['type']=='Dir')? 'navigator?path='.$file['path'] : 'file/view?path='.$file['path'],
             'icon'=> getIconForFile($file['type']),
-            'type'=> $file['type']
+            'type'=> $file['type'],
+            'location'=>$file['location']
         ];
     }
     return $parsedFiles;
@@ -42,4 +43,16 @@ function navDelete()
 {
 
 }
+
+function loadFile()
+{
+        foreach (getUploadedFiles("uploadedFile") as $file)
+        {
+            if(isset($_POST['futurePath']) && !empty($file['tmp_name'])) {
+                copy($file['tmp_name'], $_POST['futurePath']."/{$file['name']}");
+            }
+        }
+        redirectBack();
+}
+
 

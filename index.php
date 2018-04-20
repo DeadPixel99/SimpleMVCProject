@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * File: index.html
  *Purpose: Point of entry
@@ -19,3 +19,4 @@ require_once $config['render'];
 require_once $config['router'];
 
 processRequest();
+ 
