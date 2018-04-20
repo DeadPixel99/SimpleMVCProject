@@ -34,30 +34,21 @@ function getParsedFilesList($filesArray)
     return $parsedFiles;
 }
 
-function makeDirForm()
+
+function makeOrRemoveDir()
 {
-    if(isset($_POST['futurePath']))
-    {
-        pageRender('head', ['title'=>'Make dir']);
-        pageRender('navigator/createDir', ['path'=>$_POST['futurePath']]);
+    if(isset($_POST['futurePath']) && isset($_POST['dirName']) && isset($_POST['buttn'])){
+        if($_POST['buttn'] == 'Create dir' && !empty($_POST['dirName'])) {
+            createDir($_POST['futurePath'], $_POST['dirName']);
+        }
+        if($_POST['buttn'] == 'Remove dir' && !empty($_POST['dirName'])) {
+            removeDir("{$_POST['futurePath']}/{$_POST['dirName']}");
+        }
     }
-}
-
-function makeDirProccess()
-{
-    if(isset($_POST['path']) && $_POST['folderName']){
-        createDir($_POST['path'], $_POST['folderName']);
-        header("Location: ../navigator?path={$_POST['path']}");
-    }
-    else
-        header("Location: ../navigator");
+    redirectback();
 
 }
 
-function navDelete()
-{
-
-}
 
 function loadFile()
 {

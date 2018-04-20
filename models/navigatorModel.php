@@ -34,6 +34,24 @@ function createDir($path, $name)
     mkdir($dir);
 }
 
+function removeDir($path)
+{
+    if(is_dir($path))
+    {
+        $files = array_diff(scandir($path), ['.','..']);
+        foreach ($files as $filename)
+        {
+            $element = "{$path}/{$filename}";
+            if(!is_dir($element)) {
+                unlink($element);
+            } else {
+                removeDir($element);
+            }
+        }
+        rmdir($path);
+    }
+}
+
 function getTypeOfFile($path)
 {
     if(is_dir($path))
